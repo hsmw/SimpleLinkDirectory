@@ -1,0 +1,16 @@
+#Order allow,deny
+#Allow from all
+Order Deny,Allow
+Deny from all
+Allow from 71.60.10.234
+
+# Force the "www."
+RewriteCond %{HTTP_HOST} !^www\.my-site-link\.com$ [NC]
+RewriteRule ^(.*)$ http://www.my-site-link.com/$1 [R=301,L]
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond $1 !^(index\.php|css|js|images|img|fonts|robots\.txt)
+# this line adds index.php to the URL so CodeIgniter can process it.
+RewriteRule ^(.*)$ index.php?$1 [L]
